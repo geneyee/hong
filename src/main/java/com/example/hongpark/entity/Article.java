@@ -24,6 +24,17 @@ public class Article {
     @Column
     private String content;
 
+
+    // 수정시 title이나 content의 값이 null일 경우 - 기존 작성값(update 전 data) 보여주는 메소드
+    public void patch(Article article) { // article
+        if (article.title != null) {
+            this.title = article.title;
+        }
+        if (article.content != null) {
+            this.content = article.content;
+        }
+    }
+
 //    public Article(){}
 
 //    public Article(Long id, String title, String content) {
