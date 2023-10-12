@@ -1,15 +1,12 @@
 package com.example.hongpark.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Getter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor // 디폴트 생성자 추가
 @Entity // DB가 해당 객체를 인식 가능
 public class Article {
@@ -24,6 +21,12 @@ public class Article {
     @Column
     private String content;
 
+    //@Builder
+    public Article(Long id, String title, String content){
+        this.id = id;
+        this.title = title;
+        this.content = content;
+    }
 
     // 수정시 title이나 content의 값이 null일 경우 - 기존 작성값(update 전 data) 보여주는 메소드
     public void patch(Article article) { // article
