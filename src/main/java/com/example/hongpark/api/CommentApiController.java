@@ -1,5 +1,6 @@
 package com.example.hongpark.api;
 
+import com.example.hongpark.annotation.RunningTime;
 import com.example.hongpark.dto.CommentDto;
 import com.example.hongpark.entity.Comments;
 import com.example.hongpark.service.CommentsService;
@@ -48,6 +49,7 @@ public class CommentApiController {
     }
 
     // 댓글 삭제
+    @RunningTime
     @DeleteMapping("/api/comments/{id}")
     public ResponseEntity<CommentDto> delete(@PathVariable Long id) {
 

@@ -49,20 +49,29 @@ public class CommentsService {
 
     @Transactional
     public CommentDto create(Long articleId, CommentDto dto) {
+
+//        log.info("입력값 => {}", articleId);
+//        log.info("입력값 => {}", dto);
+
         // 게시글 조회 및 예외 발생
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new IllegalArgumentException("댓글 생성 실패! 대상 게시글이 없습니다."));
-        log.info("=================================="+article.toString());
+//        log.info("=================================="+article.toString());
 
         // 댓글 entity 생성
         Comments comment = Comments.createComment(dto, article);
-        log.info("=================================="+comment.toString());
+//        log.info("=================================="+comment.toString());
 
         // 댓글 entity를 db로 저장
         Comments created = commentRepository.save(comment);
 
         // entity를 dto로 변경하여 반환
         return CommentDto.createCommentDto(created);
+
+        // 출력값 로그로 확인하는 코드
+//        CommentDto createdDto = CommentDto.createCommentDto(created);
+//        log.info("변환값 => {}", createdDto);
+//        return createdDto;
     }
 
     @Transactional
@@ -89,6 +98,10 @@ public class CommentsService {
 
        commentRepository.delete(target);
 
-       return CommentDto.createCommentDto(target);
+//       return CommentDto.createCommentDto(target);
+
+        CommentDto deletedDto = CommentDto.createCommentDto(target);
+        log.info("삭제완료 => {}", deletedDto);
+        return deletedDto;
     }
 }
