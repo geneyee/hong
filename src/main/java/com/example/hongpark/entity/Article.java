@@ -3,7 +3,7 @@ package com.example.hongpark.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Optional;
+import java.util.*;
 
 @Getter
 @ToString
@@ -20,6 +20,12 @@ public class Article {
 
     @Column
     private String content;
+
+//    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
+//    private List<Comments> comments;
+
+//    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
+//    private List<Comments> comment = new ArrayList<>();
 
     //@Builder
     public Article(Long id, String title, String content){

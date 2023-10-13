@@ -1,8 +1,10 @@
 package com.example.hongpark.controller;
 
 import com.example.hongpark.dto.ArticleForm;
+import com.example.hongpark.dto.CommentDto;
 import com.example.hongpark.entity.Article;
 import com.example.hongpark.repository.ArticleRepository;
+import com.example.hongpark.service.CommentsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,9 @@ public class ArticleController {
 
     @Autowired
     private ArticleRepository articleRepository;
+
+    @Autowired
+    private CommentsService commentsService;
 
     @GetMapping("/articles/new")
     public String newArticleForm(){
@@ -53,9 +58,11 @@ public class ArticleController {
         // 1. id로 데이터를 가져옴
 //        Optional<Article> articleEntity = articleRepository.findById(id); -> title null 됨...
         Article articleEntity = articleRepository.findById(id).orElse(null);
+        List<CommentDto> commentDtos = commentsService.comments(id);
 
         // 2. 가져온 데이터를 모델에 등록
         model.addAttribute("article", articleEntity);
+        model.addAttribute("commentDtos", commentDtos);
 
         // 3. 보여줄 페이지를 설정
         return "articles/show";
