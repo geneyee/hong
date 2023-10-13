@@ -141,7 +141,7 @@
                 console.log(`삭제버튼 클릭: ${commentId}번 댓글`);
 
                 // 삭제 API 호출 및 처리
-                const url = `/api/articles/${commentId}`;
+                const url = `/api/comments/${commentId}`;
                 fetch(url, {
                     method: "DELETE",
                 }).then(response => {
