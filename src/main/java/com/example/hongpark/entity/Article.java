@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.*;
 
 @Getter
-@ToString
+//@ToString(exclude = "comment")
 @NoArgsConstructor // 디폴트 생성자 추가
 @Entity // DB가 해당 객체를 인식 가능
 public class Article {
@@ -24,8 +24,8 @@ public class Article {
 //    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
 //    private List<Comments> comments;
 
-//    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
-//    private List<Comments> comment = new ArrayList<>();
+    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
+    private List<Comments> comment = new ArrayList<>();
 
     //@Builder
     public Article(Long id, String title, String content){
@@ -60,4 +60,14 @@ public class Article {
 //                ", content='" + content + '\'' +
 //                '}';
 //    }
+
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content +
+                '}';
+    }
 }

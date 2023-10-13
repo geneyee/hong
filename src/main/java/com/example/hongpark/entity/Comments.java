@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity(name = "comments")
 @Getter
-@ToString
+//@ToString(exclude = "article")
 @NoArgsConstructor
 public class Comments {
 
@@ -18,7 +18,7 @@ public class Comments {
     private Long id;
 
     @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "article_id")
     private Article article;
 
@@ -72,5 +72,15 @@ public class Comments {
         if (dto.getBody() != null) {
             this.body = dto.getBody();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Comments{" +
+                "id=" + id +
+                ", article=" + article +
+                ", nickname='" + nickname + '\'' +
+                ", body='" + body + '\'' +
+                '}';
     }
 }
